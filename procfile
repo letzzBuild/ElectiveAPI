@@ -1,0 +1,1 @@
+web: gunicorn elective_recommander.wsgi --log-file -

@@ -26,7 +26,7 @@ SECRET_KEY = ')#c6e(je+gwx6a6m-mtr$6u=nt@8f8coo=y0z^=7sxts%8kzee'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -87,15 +87,13 @@ WSGI_APPLICATION = 'elective_recommander.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'elective_recommander',
-        'USER': 'root',
+        'USER': '',
         'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': 3306,
-        'OPTIONS': {
-            'read_default_file': '/opt/lampp/etc/my.cnf',
-        }
+        'HOST': '',
+        'PORT': '',
+        
     }
 }
 
@@ -137,7 +135,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
 
 #setting added by developer

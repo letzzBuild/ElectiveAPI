@@ -1,6 +1,12 @@
 from django.urls import path
-from . import views
+from .views import ElectivesListView,ElectivesEnrolled,UploadElectiveInfo,FacultyAssignedToElective
+
 
 urlpatterns = [
-    # path('allelectives/',views.ElectiveListSerializer.as_view())
+    #for dropdown list of all electives
+    path('allelectives/',ElectivesListView.as_view()),
+    path('enrolled/electives/',ElectivesEnrolled.as_view()),
+    path('upload/electiveinfo/',UploadElectiveInfo.as_view()),
+    path('assigned/faculty/',FacultyAssignedToElective.as_view()),
+    
 ]

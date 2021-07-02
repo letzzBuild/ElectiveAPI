@@ -14,14 +14,3 @@ class Faculty(models.Model):
     def __str__(self,):
         return self.faculty_name 
 
-class Faculty_Rating(models.Model):
-    id = models.AutoField(primary_key=True)
-    elective_id = models.ForeignKey('electives.Electives',db_column='elective_id',on_delete=models.CASCADE)
-    faculty_id = models.ForeignKey(Faculty,db_column='faculty_id',on_delete=models.CASCADE)
-    ratings = models.IntegerField()
-    comments = models.TextField()
-
-    class Meta:
-        db_table = "faculty_ratings"
-        verbose_name_plural = "faculty_ratings"
-   

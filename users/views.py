@@ -23,7 +23,7 @@ class AddUser(APIView):
          serializer = UserSerializer(data=request.data)
          if serializer.is_valid():
              serializer.save()
-             response['message'] = "registeration successful"
+             response['message'] = "registeration successfull"
              response_status = status.HTTP_200_OK
          else:
              response['error'] = serializer.errors

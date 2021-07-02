@@ -5,13 +5,14 @@ class Electives(models.Model):
     elective_id = models.AutoField(primary_key=True)
     elective_name = models.CharField(max_length=70,unique=True)
     elective_short_name = models.CharField(max_length=10,unique=True)
+    elective_code  = models.CharField(max_length=10)
     
     class Meta:
         db_table = 'electives'
         verbose_name_plural = "electives"
 
     def __str__(self,):
-        return self.elective_name   
+        return self.elective_short_name
 
 class ElectiveSemester(models.Model):
     id = models.AutoField(primary_key=True)
@@ -55,6 +56,7 @@ class ElectiveDetails(models.Model):
     elective_id = models.ForeignKey(Electives,db_column='elective_id',on_delete=models.CASCADE)
     total_intake = models.IntegerField()
     scope =  models.TextField()
-    syllabus_pdf = models.TextField()
+    syllabus_pdf_id = models.TextField()
     company_names = models.TextField()
-    introduction_video = models.TextField()    
+    introduction_video_id = models.TextField()
+    prerequisites = models.TextField()

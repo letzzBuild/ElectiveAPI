@@ -3,3 +3,4 @@ djangorestframework_simplejwt==4.7.1
 cloudinary==1.26.0
 django_model_utils==4.1.1
 djangorestframework==3.12.4
+django-model-utils==4.1.1

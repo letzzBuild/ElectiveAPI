@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import cloudinary as cloudinary
+# import cloudinary as cloudinary
 
 
 
@@ -166,8 +166,11 @@ AUTH_USER_MODEL = "users.Users"
 ALLOWED_HOSTS=['*']
 CORS_ORIGIN_ALLOW_ALL = True 
 
-cloudinary.config( 
-  cloud_name = "dmdvxshss", 
-  api_key = "878824799556528", 
-  api_secret = "GFqCMtkxFMXX6gExnh5LuKcXKZg" 
-)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# cloudinary.config( 
+#   cloud_name = "dmdvxshss", 
+#   api_key = "878824799556528", 
+#   api_secret = "GFqCMtkxFMXX6gExnh5LuKcXKZg" 
+# )

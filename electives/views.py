@@ -1,14 +1,14 @@
 from typing import Generic
 from .models import ElectiveFaculty,Electives
 from rest_framework import generics
-from .serializers import ElectiveListSerializer,FacultyAllocatedElective
+from .serializers import ElectiveListSerializer,FacultyAllocatedElective,ElectiveInfoSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from .models import Electives,ElectiveStudent,ElectiveDetails
 from rest_framework.response import Response
 from rest_framework import status
 import cloudinary.uploader as uploader
-from rest_framework.parsers import MultiPartParser, JSONParser ,FormParser
+from rest_framework.parsers import MultiPartParser, JSONParser ,FormParser,FileUploadParser
 
 class ElectivesListView(generics.ListAPIView):
     queryset = Electives.objects.all()
@@ -30,24 +30,26 @@ class ElectivesEnrolled(APIView):
             return Response(error,status=status.HTTP_500_INTERNAL_SERVER_ERROR)    
         
 class UploadElectiveInfo(APIView):
+      permission_classes = [IsAuthenticated]
+
       parser_classes = (
         MultiPartParser,
         JSONParser,
-        FormParser
+        FormParser,
+        FileUploadParser
       )
-
-
-      def uploadFiles(self,file):
-          result = uploader.upload_large(file,resource_type = "video")
-          return result
-
       def post(self, request):
-          
-          return Response("hey")    
+          serializer = ElectiveInfoSerializer(data=request.data)
+          if serializer.is_valid():
+              serializer.save()
+              return Response("success",status=status.HTTP_200_OK)
+          else:
+               print("invalid serializer")
+               return Response(serializer.errors,status=status.HTTP_500_INTERNAL_SERVER_ERROR)    
+                      
 
 class FacultyAssignedToElective(APIView):
     def get(self, request):
-        print(request.data)
         try:
            queryset=ElectiveFaculty.objects.filter(faculty_id=request.data['faculty_id'])
            serializer = FacultyAllocatedElective(queryset)
@@ -57,4 +59,9 @@ class FacultyAssignedToElective(APIView):
         
         return Response(serializer.data,status=status.HTTP_200_OK)
         
-    
+
+class ElectiveDetailsRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
+    queryset = ElectiveDetails.objects.all()
+    serializer_class = ElectiveInfoSerializer
+
+

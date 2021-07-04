@@ -38,3 +38,5 @@ class StudentHomePageSerializer(serializers.ModelSerializer):
         fields = ['stars','faculty_name','elective_name']
 
     
+# class AverageFacultyRatingSerializer(serializers.Serializer):
+#     stars_avg = serializers.FloatField(read_only=True) 

@@ -1,10 +1,10 @@
 from typing import Generic
 from .models import ElectiveFaculty,Electives
 from rest_framework import generics
-from .serializers import ElectiveListSerializer,FacultyAllocatedElective,ElectiveInfoSerializer
+from .serializers import ElectiveListSerializer,FacultyAllocatedElective,ElectiveInfoSerializer,ElectiveSelectedSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-from .models import Electives,ElectiveStudent,ElectiveDetails
+from .models import Electives,ElectiveStudent,ElectiveDetails,ElectiveSelected
 from rest_framework.response import Response
 from rest_framework import status
 import cloudinary.uploader as uploader
@@ -65,3 +65,11 @@ class ElectiveDetailsRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
     serializer_class = ElectiveInfoSerializer
 
 
+class ElectiveSelectedListCreateAPIView(generics.ListCreateAPIView):
+    queryset = ElectiveSelected.objects.all()
+    serializer_class = ElectiveSelectedSerializer
+
+
+class ElectiveReport(generics.RetrieveAPIView):
+    queryset = ElectiveDetails.objects.all()
+    serializer_class = ElectiveInfoSerializer

@@ -36,13 +36,15 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         data['dob'] = self.user.dob
         data['gender'] = self.user.gender
         try:
-            Students.objects.get(user_id=self.user.user_id)
+            student = Students.objects.get(user_id=self.user.user_id)
+            data['student_id'] = student.student_id
             data['role'] = 'student'
             return data
         except Exception as e:
             print(e)     
         try:
-            Faculty.objects.get(user_id=self.user.user_id)
+            faculty = Faculty.objects.get(user_id=self.user.user_id)
+            data['faculty_id'] = faculty.faculty_id
             data['role'] = 'faculty'
             return data
         except:

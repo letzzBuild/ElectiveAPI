@@ -57,7 +57,7 @@ class Users(AbstractUser):
 
     USERNAME_FIELD = 'email'
 
-    REQUIRED_FIELDS = ['phone','username','dob','gender','roles']
+    REQUIRED_FIELDS = ['phone','username','gender']
 
     
 

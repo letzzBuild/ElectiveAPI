@@ -15,7 +15,7 @@ class StudentHomePageSerializer(serializers.ModelSerializer):
        elective_name = ""
        try:
            elective = Electives.objects.get(elective_id=rating_obj.elective_id.elective_id)
-           elective_name  = elective.elective_name
+           elective_name  = elective.faculty_name
        except Exception as e:
            print(e)
            elective_name  = ""
@@ -25,7 +25,7 @@ class StudentHomePageSerializer(serializers.ModelSerializer):
        faculty_name = ""
        try:
            faculty = Faculty.objects.get(faculty_id=rating_obj.faculty_id.faculty_id)
-           faculty_name = faculty.faculty_name
+           faculty_name = faculty.elective_name
        except Exception as e:
            print(e)
            faculty_name = ""

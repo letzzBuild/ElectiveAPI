@@ -60,3 +60,11 @@ class ElectiveDetails(models.Model):
     company_names = models.TextField(blank=False)
     introduction_video = models.FileField()
     prerequisites = models.TextField()
+
+class ElectiveSelected(models.Model): 
+    student_id = models.ForeignKey('students.Students',db_column='student_id',on_delete=models.CASCADE)
+    elective_id = models.ForeignKey(Electives,db_column='elective_id',on_delete=models.CASCADE)
+    priority = models.IntegerField()
+    
+    class Meta:
+        db_table = 'electiveSelected'

@@ -2,7 +2,7 @@ from django.urls import path
 from .views import ElectivesListView,ElectivesEnrolled,\
 UploadElectiveInfo,FacultyAssignedToElective,\
 ElectiveDetailsRetrieveUpdateAPIView,\
-ElectiveSelectedListCreateAPIView
+ElectiveSelectedListCreateAPIView,ElectiveDetailedReport
 
 
 urlpatterns = [
@@ -13,6 +13,6 @@ urlpatterns = [
     path('electivepriority/',ElectiveSelectedListCreateAPIView.as_view()),
     path('retriveupdate/electiveinfo/<int:pk>',ElectiveDetailsRetrieveUpdateAPIView.as_view()),
     path('assigned/faculty/',FacultyAssignedToElective.as_view()),
-    path('elective/report/<int:pk>',FacultyAssignedToElective.as_view()),
+    path('elective/report/',ElectiveDetailedReport.as_view()),
     
 ]

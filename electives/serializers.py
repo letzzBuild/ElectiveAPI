@@ -39,6 +39,23 @@ class ElectiveInfoSerializer(serializers.ModelSerializer):
 
 
 class FacultyAllocatedElective(serializers.ModelSerializer):
+    elective_name = serializers.SerializerMethodField('get_elective_name')
+    average_rating = serializers.SerializerMethodField('get_average_rating')
+ 
+
+    def get_elective_name(self,obj):
+        return obj.elective_id.elective_name
+        
+         
+    def get_average_rating(self,obj):
+      try:
+          average_rating = Ratings.objects.filter(elective_id=obj.elective_id.elective_id).aggregate(Avg('stars'))
+          return average_rating
+      except Exception as e:
+          print(e) 
+          average_rating = 0
+          return average_rating
+
     class Meta:
       model = ElectiveFaculty
       fields = '__all__'

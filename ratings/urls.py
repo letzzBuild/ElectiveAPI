@@ -1,10 +1,11 @@
 
 from django.contrib import admin
 from django.urls import path
-from .views import StudentHomePageView,AverageFacultyRating
+from .views import StudentHomePageView,AverageFacultyRating,StudentRatings
 
 urlpatterns = [
-    path('student/home',StudentHomePageView.as_view()),
-    path('averagerating/<int:pk>',AverageFacultyRating.as_view()),
+    path('student/home/<int:pk>/',StudentHomePageView.as_view()),
+    path('averagerating/',AverageFacultyRating.as_view()),
+    path('student/rating/',StudentRatings.as_view()),
 
 ]

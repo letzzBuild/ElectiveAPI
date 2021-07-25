@@ -68,3 +68,15 @@ class ElectiveSelected(models.Model):
     
     class Meta:
         db_table = 'electiveSelected'
+
+
+
+
+
+class ElectiveChoosenPriority(models.Model):
+    elective_name = models.CharField(max_length=40)
+    priority = models.IntegerField()
+    student_id = models.ForeignKey('students.Students',db_column='student_id',on_delete=models.CASCADE)
+    
+    class Meta:
+        db_table = 'elective_priority_selected'

@@ -1,0 +1,17 @@
+
+
+1. cd sumo/tools
+
+2.python osmWebWizard.py
+
+3. Select MAp
+
+4. /sumo/tools/2019-08-03-03-18-12$      ---->   sumo -c osm.sumocfg --fcd-output trace.xml
+
+5. ~/sumo/tools$      ----------------- >  python traceExporter.py -i 2019-08-03-06-14-11/trace.xml --ns2mobility-output=2019-08-03-03-18-12/mobility.tcl
+
+6.  Note numnodes in mobility.tcl and copy it to home directry
+
+7. ~/ns-allinone-3.27/ns-3.27 / -------------------->  ./waf --run "scratch/ns2-mobility-trace --traceFile=/home/hp/mobility.tcl --nodeNum=623 --duration=100.0 --logFile=ns2-mob.log"
+
+

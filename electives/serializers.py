@@ -1,7 +1,7 @@
 
 from rest_framework import serializers 
 from django.db.models import Avg
-from .models import Electives,ElectiveStudent,ElectiveDetails,ElectiveFaculty,ElectiveSelected
+from .models import Electives,ElectiveStudent,ElectiveDetails,ElectiveFaculty,ElectiveSelected,ElectiveChoosenPriority
 from ratings.models import Ratings
 
 class ElectiveListSerializer(serializers.ModelSerializer):
@@ -66,4 +66,8 @@ class ElectiveSelectedSerializer(serializers.ModelSerializer):
      model = ElectiveSelected
      fields = '__all__'
 
+class ElectiveChoosenPrioritySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ElectiveChoosenPriority
+        fields = '__all__'
     

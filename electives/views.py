@@ -1,10 +1,12 @@
+from re import A
+from students.models import Students
 from typing import Generic
-from .models import ElectiveFaculty,Electives
+from .models import ElectiveFaculty, ElectiveSemester,Electives
 from rest_framework import generics
-from .serializers import ElectiveListSerializer,FacultyAllocatedElective,ElectiveInfoSerializer,ElectiveSelectedSerializer
+from .serializers import ElectiveListSerializer,FacultyAllocatedElective,ElectiveInfoSerializer,ElectiveSelectedSerializer,ElectiveChoosenPrioritySerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-from .models import Electives,ElectiveStudent,ElectiveDetails,ElectiveSelected
+from .models import Electives,ElectiveStudent,ElectiveDetails,ElectiveSelected,ElectiveChoosenPriority
 from rest_framework.response import Response
 from rest_framework import status
 import cloudinary.uploader as uploader
@@ -86,8 +88,9 @@ class ElectiveReport(generics.RetrieveAPIView):
 
 class ElectiveDetailedReport(APIView):
     def post(self, request):
+        print(request.data)
         elective_id = request.data['elective_id']
-        cgpa = request.data['cgpa']
+        cgpa = float(request.data['cgpa'])
         result = {}
         dataset = BASE_DIR + STATIC_URL + 'JR_dataset.csv'
         df = pd.read_csv(dataset)
@@ -131,4 +134,33 @@ class ElectiveDetailedReport(APIView):
 
         except Exception as e:
             print(e) 
-            return Response(e)   
+            return Response(e) 
+
+
+class ElectivesForParticularSemester(APIView):
+    def get(self,request,pk):
+        result = []
+        elective_object = {}
+        student=Students.objects.get(user_id=pk)
+        semester_id = student.semester_id
+        print(semester_id.semester_id)
+        elective_semester=ElectiveSemester.objects.filter(semester_id=semester_id.semester_id)
+        for elective in elective_semester:
+            elective_object['elective_name'] = elective.elective_id.elective_name
+            elective_object['elective_id'] = elective.elective_id.elective_id
+            result.append(elective_object)
+            elective_object = {}
+        return Response(result)              
+
+class ElectivePriorityView(APIView):
+    def post(self, request):
+        for data in request.data:
+            serializer = ElectiveChoosenPrioritySerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+        return Response("success")        
+            
+
+
+        
+

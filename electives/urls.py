@@ -1,6 +1,6 @@
 from electives.models import ElectiveChoosenPriority
 from django.urls import path
-from .views import ElectivePriorityView, ElectivesForParticularSemester, ElectivesListView,ElectivesEnrolled,\
+from .views import AllQuestionsView, ElectivePriorityView, ElectivesForParticularSemester, ElectivesListView,ElectivesEnrolled,\
 UploadElectiveInfo,FacultyAssignedToElective,\
 ElectiveDetailsRetrieveUpdateAPIView,\
 ElectiveSelectedListCreateAPIView,ElectiveDetailedReport
@@ -17,5 +17,7 @@ urlpatterns = [
     path('elective/report/',ElectiveDetailedReport.as_view()),
     path('semelectives/student/<int:pk>',ElectivesForParticularSemester.as_view()),
     path('semelectives/student/<int:pk>',ElectivesForParticularSemester.as_view()),
-    path('priority/',ElectivePriorityView.as_view())
+    path('priority/',ElectivePriorityView.as_view()),
+    path('questions/<int:pk>',AllQuestionsView.as_view()),
+
 ]

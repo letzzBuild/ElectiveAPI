@@ -1,9 +1,9 @@
 from re import A
 from students.models import Students
 from typing import Generic
-from .models import ElectiveFaculty, ElectiveSemester,Electives
+from .models import ElectiveFaculty, ElectiveSemester,Electives, RecommanderQuestions
 from rest_framework import generics
-from .serializers import ElectiveListSerializer,FacultyAllocatedElective,ElectiveInfoSerializer,ElectiveSelectedSerializer,ElectiveChoosenPrioritySerializer
+from .serializers import ElectiveListSerializer,FacultyAllocatedElective,ElectiveInfoSerializer,ElectiveSelectedSerializer,ElectiveChoosenPrioritySerializer, RecommanderQuestionsSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from .models import Electives,ElectiveStudent,ElectiveDetails,ElectiveSelected,ElectiveChoosenPriority
@@ -158,7 +158,26 @@ class ElectivePriorityView(APIView):
             serializer = ElectiveChoosenPrioritySerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
-        return Response("success")        
+        return Response("success") 
+       
+class AllQuestionsView(APIView):
+    def get(self,request,pk):
+        student=Students.objects.get(user_id=pk)
+        semester_id = student.semester_id
+        print(semester_id.semester_id)
+        questions=RecommanderQuestions.objects.filter(semester_id=semester_id.semester_id)
+        serializer = RecommanderQuestionsSerializer(questions,many=True)
+        return Response(serializer.data) 
+
+class RecommandElective(APIView):
+    def post(self, request):
+        data = request.data
+        for questionObj in data:
+            answer = questionObj['answer']
+            if(answer=="yes"):
+                return Response({'status':1,"message":questionObj['elective']},status=status.HTTP_200_OK)
+
+        return Response({'status':0,"message":"try answering  properly"},status=status.HTTP_200_OK)       
             
 
 

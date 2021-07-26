@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import Electives,ElectiveSemester,ElectiveFaculty,\
-ElectiveStudent,ElectiveSelected,ElectiveChoosenPriority
+ElectiveStudent,ElectiveSelected,ElectiveChoosenPriority, RecommanderQuestions
 
 # Register your models here.
 admin.site.register(Electives)
@@ -10,3 +10,4 @@ admin.site.register(ElectiveFaculty)
 admin.site.register(ElectiveStudent)
 admin.site.register(ElectiveSelected)
 admin.site.register(ElectiveChoosenPriority)
+admin.site.register(RecommanderQuestions)

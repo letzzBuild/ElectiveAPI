@@ -80,3 +80,8 @@ class ElectiveChoosenPriority(models.Model):
     
     class Meta:
         db_table = 'elective_priority_selected'
+
+class RecommanderQuestions(models.Model):
+    question = models.TextField()
+    subject_name = models.CharField(max_length=40)
+    semester_id = models.ForeignKey('semesters.Semesters',db_column='semester_id',on_delete=models.CASCADE)

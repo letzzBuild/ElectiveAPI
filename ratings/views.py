@@ -41,6 +41,7 @@ class AverageFacultyRating(APIView):
 #write updating logic
 class StudentRatings(APIView):
     def post(self, request):
+        
         data = request.data
         try:
             elective_faculty=ElectiveFaculty.objects.get(elective_id=request.data['elective_id'])

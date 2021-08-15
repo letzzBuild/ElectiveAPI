@@ -15,7 +15,7 @@ class StudentHomePageView(APIView):
     def get(self,request,pk):
         result = []
         elective_object = {}
-        student=Students.objects.get(user_id=pk)
+        student=Students.objects.get(student_id=pk)
         semester_id = student.semester_id
         print(semester_id.semester_id)
         elective_semester=ElectiveSemester.objects.filter(semester_id=semester_id.semester_id)
@@ -24,6 +24,7 @@ class StudentHomePageView(APIView):
             elective_object['elective_name'] = elective.elective_id.elective_name
             average_rating = Ratings.objects.filter(elective_id=elective.elective_id.elective_id).aggregate(Avg('stars'))
             elective_object['ratings'] = average_rating['stars__avg']
+            print(elective.elective_id.elective_id)
             faculties = ElectiveFaculty.objects.get(elective_id=elective.elective_id.elective_id)
             elective_object['faculty_name'] = faculties.faculty_id.faculty_name
             result.append(elective_object)

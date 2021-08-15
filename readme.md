@@ -11,8 +11,12 @@ database with name `elective_recommander`
 which will create the required tables in the database.
    1. python manage.py makemigrations
    2. python manage.py migrate
-6. Run the project by typing python manage.py runserver.
+6. Run the project by typing python manage.py runserver
 
 ******** ADMIN URL TO ADD CONFIGURATIONS ********
 http://127.0.0.1:8000/admin => open admin panel
 http://127.0.0.1:8000 => application runs on this url
+
+#to create an admin ac
+python manage.py createsuper
+

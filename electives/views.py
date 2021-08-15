@@ -141,7 +141,7 @@ class ElectivesForParticularSemester(APIView):
     def get(self,request,pk):
         result = []
         elective_object = {}
-        student=Students.objects.get(user_id=pk)
+        student=Students.objects.get(student_id=pk)
         semester_id = student.semester_id
         print(semester_id.semester_id)
         elective_semester=ElectiveSemester.objects.filter(semester_id=semester_id.semester_id)
@@ -150,6 +150,7 @@ class ElectivesForParticularSemester(APIView):
             elective_object['elective_id'] = elective.elective_id.elective_id
             result.append(elective_object)
             elective_object = {}
+        print(result)    
         return Response(result)              
 
 class ElectivePriorityView(APIView):
@@ -162,7 +163,7 @@ class ElectivePriorityView(APIView):
        
 class AllQuestionsView(APIView):
     def get(self,request,pk):
-        student=Students.objects.get(user_id=pk)
+        student=Students.objects.get(student_id=pk)
         semester_id = student.semester_id
         print(semester_id.semester_id)
         questions=RecommanderQuestions.objects.filter(semester_id=semester_id.semester_id)
